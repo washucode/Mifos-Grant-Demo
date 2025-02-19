@@ -14,11 +14,11 @@ export const environment = {
   // For connecting to others servers running elsewhere update the base API URL
 
   baseApiUrls:
-    loadedEnv['FINERACT_API_URLS'] ||
+    loadedEnv['fineractApiUrls'] ||
     'https://dev.mifos.io,https://demo.mifos.io,https://qa.mifos.io,https://staging.mifos.io,https://mobile.mifos.io,https://demo.fineract.dev,https://localhost:8443',
   // For connecting to server running elsewhere set the base API URL
-  baseApiUrl: loadedEnv['FINERACT_API_URLS'] || window.location.protocol + '//' + window.location.hostname,
-  oauthServerUrl: loadedEnv['oauthServerUrl'] || loadedEnv['FINERACT_API_URLS'] + loadedEnv['apiProvider'],
+  baseApiUrl: loadedEnv['fineractApiUrls'] || window.location.protocol + '//' + window.location.hostname,
+  oauthServerUrl: loadedEnv['oauthServerUrl'] || loadedEnv['fineractApiUrls'] + loadedEnv['apiProvider'],
   allowServerSwitch: env.allow_switching_backend_instance,
   apiProvider: loadedEnv['apiProvider'] || '/fineract-provider/api',
   apiVersion: loadedEnv['apiVersion'] || '/v1',
