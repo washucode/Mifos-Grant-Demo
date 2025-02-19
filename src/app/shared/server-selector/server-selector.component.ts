@@ -23,6 +23,8 @@ export class ServerSelectorComponent implements OnInit {
   /** Server Settings. */
   servers: string[];
 
+  selectedServer: string = ''; 
+
   /** Server Setting */
   serverSelector = new UntypedFormControl('');
 
