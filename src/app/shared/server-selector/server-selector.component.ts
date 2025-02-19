@@ -21,7 +21,7 @@ export class ServerSelectorComponent implements OnInit {
   form: any;
 
   /** Server Settings. */
-  servers: string[];
+  // servers: string[];
 
   selectedServer: string = ''; 
 
@@ -30,6 +30,7 @@ export class ServerSelectorComponent implements OnInit {
 
   /** Server list to show */
   existMoreThanOneServer = false;
+
 
   /**
    * @param {SettingsService} settingsService Settings Service
@@ -65,13 +66,13 @@ export class ServerSelectorComponent implements OnInit {
   //     });
   //   }
   // }
-
+ servers: string[] = [
+    'https://staging.mifos.io',
+    'https://demo.mifos.io'
+  ];
+  
   gOnInit(): void {
     // ✅ Hardcoded server URLs (only picking from these)
-    this.servers = [
-      'https://staging.mifos.io',
-      'https://demo.mifos.io'
-    ];
 
     console.log('Loaded Servers:', this.servers); // Debugging log
 
@@ -99,10 +100,13 @@ export class ServerSelectorComponent implements OnInit {
   /**
    * Set backend server from the list
    */
+  // setServer(): void {
+  //   this.settingsService.setServer(this.serverSelector.value);
+  // }
   setServer(): void {
-    this.settingsService.setServer(this.serverSelector.value);
+    this.selectedServer = this.serverSelector.value; // ✅ Directly update selectedServer
+    console.log('Server Selected:', this.selectedServer); // Debugging log
   }
-
   /**
    * Add new server to the list.
    */
