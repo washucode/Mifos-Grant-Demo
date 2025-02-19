@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators, FormControl } from '@angular/forms';
 /** Custom Services */
 import { SettingsService } from 'app/settings/settings.service';
 import { environment } from '../../../environments/environment';
@@ -71,7 +71,7 @@ export class ServerSelectorComponent implements OnInit {
     'https://demo.mifos.io'
   ];
   
-  gOnInit(): void {
+  ngOnInit(): void {
     // ✅ Hardcoded server URLs (only picking from these)
 
     console.log('Loaded Servers:', this.servers); // Debugging log
