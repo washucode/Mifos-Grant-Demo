@@ -70,32 +70,26 @@ export class ServerSelectorComponent implements OnInit {
     'https://staging.mifos.io',
     'https://demo.mifos.io'
   ];
-  
   ngOnInit(): void {
-    // ✅ Hardcoded server URLs (only picking from these)
-
-    console.log('Loaded Servers:', this.servers); // Debugging log
-
-    // ✅ Determine if multiple servers exist
-    this.existMoreThanOneServer = this.servers.length > 1;
-
-    // ✅ Initialize Form Control with the first server as the default
-    this.serverSelector = new FormControl(this.servers[0]);
-
-    if (!this.existMoreThanOneServer) {
-      // ✅ Auto-select the only available server
+      console.log('Loaded Servers:', this.servers); // Debugging log
+    
+      // ✅ Ensure the servers list is populated
+      this.servers = [
+        'https://staging.mifos.io',
+        'https://demo.mifos.io'
+      ];
+    
+      this.existMoreThanOneServer = this.servers.length > 1;
+      console.log('Exist More Than One Server:', this.existMoreThanOneServer); // Debugging log
+    
+      this.serverSelector.setValue(this.servers[0]); // ✅ Set default value
       this.selectedServer = this.servers[0];
-    } else {
-      // ✅ Allow user selection
-      this.selectedServer = this.servers[0];
-      this.serverSelector.patchValue(this.selectedServer);
-
-      // ✅ Initialize form for adding a new server (optional)
+    
       this.form = this.formBuilder.group({
         url: ['', [Validators.required]]
       });
     }
-  }
+
 
   /**
    * Set backend server from the list
