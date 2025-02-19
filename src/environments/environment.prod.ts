@@ -12,16 +12,13 @@ export const environment = {
   fineractPlatformTenantId: loadedEnv['fineractPlatformTenantId'] || 'default',
   fineractPlatformTenantIds: loadedEnv['fineractPlatformTenantIds'] || 'default',
   // For connecting to others servers running elsewhere update the base API URL
-  baseApiUrls: process.env['FINERACT_API_URLS'] || 
+
+  baseApiUrls:
+    loadedEnv['FINERACT_API_URLS'] ||
     'https://dev.mifos.io,https://demo.mifos.io,https://qa.mifos.io,https://staging.mifos.io,https://mobile.mifos.io,https://demo.fineract.dev,https://localhost:8443',
-
-
-  // baseApiUrls:
-  //   loadedEnv['fineractApiUrls'] ||
-  //   'https://dev.mifos.io,https://demo.mifos.io,https://qa.mifos.io,https://staging.mifos.io,https://mobile.mifos.io,https://demo.fineract.dev,https://localhost:8443',
   // For connecting to server running elsewhere set the base API URL
-  baseApiUrl: loadedEnv['fineractApiUrl'] || window.location.protocol + '//' + window.location.hostname,
-  oauthServerUrl: loadedEnv['oauthServerUrl'] || loadedEnv['fineractApiUrl'] + loadedEnv['apiProvider'],
+  baseApiUrl: loadedEnv['FINERACT_API_URLS'] || window.location.protocol + '//' + window.location.hostname,
+  oauthServerUrl: loadedEnv['oauthServerUrl'] || loadedEnv['FINERACT_API_URLS'] + loadedEnv['apiProvider'],
   allowServerSwitch: env.allow_switching_backend_instance,
   apiProvider: loadedEnv['apiProvider'] || '/fineract-provider/api',
   apiVersion: loadedEnv['apiVersion'] || '/v1',
