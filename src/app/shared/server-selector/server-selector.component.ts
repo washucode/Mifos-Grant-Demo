@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 /** Custom Services */
 import { SettingsService } from 'app/settings/settings.service';
+import { environment } from '../../environments/environment'
 
 /**
  * Server Selector Component
@@ -38,6 +39,12 @@ export class ServerSelectorComponent implements OnInit {
 
   ngOnInit(): void {
     this.servers = this.settingsService.servers;
+
+     if (!this.servers || this.servers.length === 0) {
+    // If no servers exist, initialize from environment variables
+    this.settingsService.setServers(environment.baseApiUrls.split(','));
+    this.servers = this.settingsService.servers;
+    }// Reload after setting
     this.existMoreThanOneServer = this.servers && this.servers.length > 1;
     if (!this.existMoreThanOneServer) {
       this.settingsService.setServer(this.servers[0]);
