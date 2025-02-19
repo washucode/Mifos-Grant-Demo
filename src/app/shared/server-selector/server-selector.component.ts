@@ -66,7 +66,7 @@ export class ServerSelectorComponent implements OnInit {
   //   }
   // }
 
-  nInit(): void {
+  gOnInit(): void {
     // ✅ Hardcoded server URLs (only picking from these)
     this.servers = [
       'https://staging.mifos.io',
