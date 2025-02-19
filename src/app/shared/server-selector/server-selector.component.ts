@@ -62,19 +62,23 @@ export class ServerSelectorComponent implements OnInit {
     //   });
     // }
 
-    // Hardcoded server URL for testing
-    this.servers = ['https://staging.mifos.io'];
-  
-    // Ensure the dropdown recognizes it
+    // Load two servers for testing
+    this.servers = [
+      'https://staging.mifos.io',
+      'https://demo.mifos.io'
+    ];
+
+    // Check if multiple servers exist
     this.existMoreThanOneServer = this.servers.length > 1;
-  
+
     if (!this.existMoreThanOneServer) {
-      // Auto-select the only available server
+      // If only one server exists, auto-select it
       this.selectedServer = this.servers[0]; 
     } else {
-      this.serverSelector.patchValue(this.selectedServer);
+      // Allow user selection if multiple servers exist
+      this.selectedServer = this.servers[0]; // Default to first server
       this.form = this.formBuilder.group({
-        url: ['', [Validators.required]]
+        url: [this.selectedServer, [Validators.required]]
       });
     }
   }
