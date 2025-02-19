@@ -5,7 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 /** Custom Services */
 import { SettingsService } from 'app/settings/settings.service';
-import { environment } from '../../environments/environment'
+import { environment } from '../../../environments/environment';
+
 
 /**
  * Server Selector Component
