@@ -65,6 +65,13 @@ export class SettingsService {
     localStorage.setItem('mifosXServerURL', url);
   }
 
+  setServers(list: string[]) {
+  if (!list || list.length === 0) {
+    list = environment.baseApiUrls.split(',');
+  }
+  localStorage.setItem('mifosXServers', JSON.stringify(list));
+}
+
   /**
    * Sets server URL setting throughout the app.
    * @param {string[]} list List of default servers
