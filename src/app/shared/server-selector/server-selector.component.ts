@@ -41,44 +41,27 @@ export class ServerSelectorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.servers = this.settingsService.servers;
-
-    //  if (!this.servers || this.servers.length === 0) {
-    // // If no servers exist, initialize from environment variables
-    // this.settingsService.setServers(environment.baseApiUrls.split(','));
-    // this.servers = this.settingsService.servers;
-    // }// Reload after setting
-    // this.existMoreThanOneServer = this.servers && this.servers.length > 1;
-    // if (!this.existMoreThanOneServer) {
-    //   this.settingsService.setServer(this.servers[0]);
-    // } else {
-    //   this.existMoreThanOneServer = true;
-    //   this.serverSelector.patchValue(this.settingsService.server);
-    //   this.form = this.formBuilder.group({
-    //     url: [
-    //       '',
-    //       [Validators.required]
-    //     ]
-    //   });
-    // }
-
-    // Load two servers for testing
     this.servers = [
       'https://staging.mifos.io',
       'https://demo.mifos.io'
     ];
 
-    // Check if multiple servers exist
-    this.existMoreThanOneServer = this.servers.length > 1;
-
+     if (!this.servers || this.servers.length === 0) {
+    // If no servers exist, initialize from environment variables
+    this.settingsService.setServers(environment.baseApiUrls.split(','));
+    this.servers = this.settingsService.servers;
+    }// Reload after setting
+    this.existMoreThanOneServer = this.servers && this.servers.length > 1;
     if (!this.existMoreThanOneServer) {
-      // If only one server exists, auto-select it
-      this.selectedServer = this.servers[0]; 
+      this.settingsService.setServer(this.servers[0]);
     } else {
-      // Allow user selection if multiple servers exist
-      this.selectedServer = this.servers[0]; // Default to first server
+      this.existMoreThanOneServer = true;
+      this.serverSelector.patchValue(this.settingsService.server);
       this.form = this.formBuilder.group({
-        url: [this.selectedServer, [Validators.required]]
+        url: [
+          '',
+          [Validators.required]
+        ]
       });
     }
   }
