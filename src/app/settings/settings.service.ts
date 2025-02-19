@@ -76,9 +76,9 @@ export class SettingsService {
    * Sets server URL setting throughout the app.
    * @param {string[]} list List of default servers
    */
-  setServers(list: string[]) {
-    localStorage.setItem('mifosXServers', JSON.stringify(list));
-  }
+  // setServers(list: string[]) {
+  //   localStorage.setItem('mifosXServers', JSON.stringify(list));
+  // }
 
   /**
    * Sets Tenant Identifiers list setting throughout the app.
