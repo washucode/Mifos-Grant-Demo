@@ -12,6 +12,7 @@ export const environment = {
   fineractPlatformTenantId: loadedEnv['fineractPlatformTenantId'] || 'default',
   fineractPlatformTenantIds: loadedEnv['fineractPlatformTenantIds'] || 'default',
   // For connecting to others servers running elsewhere update the base API URL
+  apiUrl: process.env['API_URL'] || 'https://staging.mifos.io/fineract-provider/api/v1'
   baseApiUrls:
     loadedEnv['fineractApiUrls'] ||
     'https://dev.mifos.io,https://demo.mifos.io,https://qa.mifos.io,https://staging.mifos.io,https://mobile.mifos.io,https://demo.fineract.dev,https://localhost:8443',
