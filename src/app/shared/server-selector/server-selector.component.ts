@@ -71,22 +71,31 @@ export class ServerSelectorComponent implements OnInit {
     'https://demo.mifos.io'
   ];
   ngOnInit(): void {
-      console.log('Loaded Servers:', this.servers); // Debugging log
+      console.log('Loaded Default Servers:', this.servers); // Debugging log
 
-      // ✅ Ensure `existMoreThanOneServer` is set correctly
+      // ✅ Get stored server OR fallback to Vercel environment variable
+      let savedServer = localStorage.getItem('mifosXServerURL') || (window as any)['NEXT_PUBLIC_MIFOSX_SERVER'] || 'https://staging.mifos.io';
+    
+      // ✅ Save the server if not already stored
+      if (!localStorage.getItem('mifosXServerURL')) {
+        localStorage.setItem('mifosXServerURL', savedServer);
+        console.log('Server Set from Vercel:', savedServer);
+      }
+    
+      // ✅ Ensure `mifosXServers` includes the saved server
+      let storedServers = JSON.parse(localStorage.getItem('mifosXServers') || '[]');
+      if (!storedServers.includes(savedServer)) {
+        storedServers.push(savedServer);
+        localStorage.setItem('mifosXServers', JSON.stringify(storedServers));
+        console.log('Updated mifosXServers:', storedServers);
+      }
+    
+      this.servers = storedServers; // ✅ Update dropdown list with stored servers
+      this.selectedServer = savedServer;
+      this.serverSelector = new UntypedFormControl(this.selectedServer);
       this.existMoreThanOneServer = this.servers.length > 1;
-      console.log('Exist More Than One Server:', this.existMoreThanOneServer); // Debugging log
-    
-      // ✅ Initialize Form Control properly before using `setValue()`
-      this.serverSelector = new UntypedFormControl(this.servers[0]); 
-    
-      // ✅ Set default selected server
-      this.selectedServer = this.servers[0];
-    
-      // ✅ Initialize Form for adding new server
-      this.form = this.formBuilder.group({
-        url: ['', [Validators.required]]
-      });
+
+      console.log('Using Server:', this.selectedServer);
     }
 
 
@@ -112,15 +121,19 @@ export class ServerSelectorComponent implements OnInit {
   console.log('Server Selected:', this.selectedServer); // Debugging log
 }
 
-  /**
-   * Add new server to the list.
-   */
-  addNewServer(): void {
-    let servers;
+/**
+ * Add new server to the list.
+ */
+addNewServer(): void {
+  let servers = this.settingsService.servers || [];
+
+  if (this.form.value.url) {
     this.settingsService.setServer(this.form.value.url);
-    servers = this.settingsService.servers;
     servers.push(this.form.value.url);
     this.settingsService.setServers(servers);
+    console.log('New server added:', this.form.value.url); // ✅ Debugging log
     window.location.reload();
+  } else {
+    console.error('No URL entered!'); // ✅ Error handling
   }
 }
