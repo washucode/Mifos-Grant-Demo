@@ -137,3 +137,4 @@ addNewServer(): void {
     console.error('No URL entered!'); // ✅ Error handling
   }
 }
+}
