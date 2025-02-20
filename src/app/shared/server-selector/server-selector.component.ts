@@ -71,7 +71,7 @@ export class ServerSelectorComponent implements OnInit {
     'https://demo.mifos.io'
   ];
   ngOnInit(): void {
-      cons  console.log('Loaded Servers:', this.servers); // Debugging log
+      console.log('Loaded Servers:', this.servers); // Debugging log
 
       // ✅ Ensure `existMoreThanOneServer` is set correctly
       this.existMoreThanOneServer = this.servers.length > 1;
