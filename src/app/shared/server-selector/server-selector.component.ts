@@ -71,21 +71,21 @@ export class ServerSelectorComponent implements OnInit {
     'https://demo.mifos.io'
   ];
   ngOnInit(): void {
-      console.log('Loaded Servers:', this.servers); // Debugging log
+      cons  console.log('Loaded Servers:', this.servers); // Debugging log
+
+      // ✅ Ensure `existMoreThanOneServer` is set correctly
+      this.existMoreThanOneServer = this.servers.length > 1;
+      console.log('Exist More Than One Server:', this.existMoreThanOneServer); // Debugging log
     
-      // ✅ Ensure the servers list is populated
-      this.servers = [
-        'https://staging.mifos.io',
-        'https://demo.mifos.io'
-      ];
-     this.existMoreThanOneServer = this.servers.length > 1;
-    console.log('Exist More Than One Server:', this.existMoreThanOneServer); // Debugging log
-
-  this.serverSelector.setValue(this.servers[0]); // ✅ Set default value
-  this.selectedServer = this.servers[0];
-
-  this.form = this.formBuilder.group({
-    url: ['', [Validators.required]]
+      // ✅ Initialize Form Control properly before using `setValue()`
+      this.serverSelector = new UntypedFormControl(this.servers[0]); 
+    
+      // ✅ Set default selected server
+      this.selectedServer = this.servers[0];
+    
+      // ✅ Initialize Form for adding new server
+      this.form = this.formBuilder.group({
+        url: ['', [Validators.required]]
       });
     }
 
@@ -96,10 +96,22 @@ export class ServerSelectorComponent implements OnInit {
   // setServer(): void {
   //   this.settingsService.setServer(this.serverSelector.value);
   // }
+  // setServer(): void {
+  //   this.selectedServer = this.serverSelector.value; // ✅ Directly update selectedServer
+  //   console.log('Server Selected:', this.selectedServer); // Debugging log
+  // }
+
   setServer(): void {
-    this.selectedServer = this.serverSelector.value; // ✅ Directly update selectedServer
-    console.log('Server Selected:', this.selectedServer); // Debugging log
+  if (!this.serverSelector.value) {
+    console.error('No server selected!'); // Debugging log
+    return;
   }
+
+  this.selectedServer = this.serverSelector.value; // ✅ Directly update selectedServer
+  localStorage.setItem('mifosXServerURL', this.selectedServer); // ✅ Persist selection
+  console.log('Server Selected:', this.selectedServer); // Debugging log
+}
+
   /**
    * Add new server to the list.
    */
