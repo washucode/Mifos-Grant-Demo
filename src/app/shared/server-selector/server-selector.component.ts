@@ -78,15 +78,14 @@ export class ServerSelectorComponent implements OnInit {
         'https://staging.mifos.io',
         'https://demo.mifos.io'
       ];
-    
-      this.existMoreThanOneServer = this.servers.length > 1;
-      console.log('Exist More Than One Server:', this.existMoreThanOneServer); // Debugging log
-    
-      this.serverSelector.setValue(this.servers[0]); // ✅ Set default value
-      this.selectedServer = this.servers[0];
-    
-      this.form = this.formBuilder.group({
-        url: ['', [Validators.required]]
+     this.existMoreThanOneServer = this.servers.length > 1;
+    console.log('Exist More Than One Server:', this.existMoreThanOneServer); // Debugging log
+
+  this.serverSelector.setValue(this.servers[0]); // ✅ Set default value
+  this.selectedServer = this.servers[0];
+
+  this.form = this.formBuilder.group({
+    url: ['', [Validators.required]]
       });
     }
 
