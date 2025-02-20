@@ -169,12 +169,10 @@ export class SettingsService {
   /**
    * Returns server setting
    */
-  get server() {
-    if (localStorage.getItem('mifosXServerURL')) {
-      return localStorage.getItem('mifosXServerURL');
-    }
-    return environment.baseApiUrl;
-  }
+  get server(): string {
+  return localStorage.getItem('mifosXServerURL') || 'https://staging.mifos.io';
+ }
+
 
   /**
    * Returns server url with api path without version
