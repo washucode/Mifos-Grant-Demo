@@ -67,7 +67,7 @@ export class SettingsService {
 
   setServer() {
   const url = 'https://staging.mifos.io'; // ✅ Directly setting the URL
-  localStorage.setItem('mifosXServerURL', url);
+  localStorage.setItem('mifosXServerURL', url); //debug log
   console.log('Server Set to:', url);
   }// Debugging log
 
