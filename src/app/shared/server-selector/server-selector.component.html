@@ -1,7 +1,6 @@
 <mat-form-field id="server-selector">
   <mat-label>{{ 'labels.inputs.Server' | translate }}</mat-label>
   <mat-select [formControl]="serverSelector" (selectionChange)="setServer()">
-    
     <!-- Server Options -->
     <mat-option *ngFor="let server of servers" [value]="server">
       {{ server }}
@@ -11,7 +10,6 @@
     <div class="sticky">
       <form [formGroup]="form" (ngSubmit)="addNewServer()">
         <div class="actions">
-          
           <!-- Input Field for New Server -->
           <mat-form-field class="ml" fxFlexAlign="start">
             <span matPrefix>
@@ -30,11 +28,8 @@
           <button type="submit" [disabled]="form.invalid" class="ml" mat-raised-button color="primary">
             {{ 'labels.buttons.Add' | translate }}
           </button>
-          
         </div>
       </form>
     </div>
-
   </mat-select>
 </mat-form-field>
-

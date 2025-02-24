@@ -66,25 +66,21 @@ export class SettingsService {
   // }
 
   setServer(url: string) {
-  if (!url) {
-    console.error('No URL provided to setServer!');
-    return;
+    if (!url) {
+      console.error('No URL provided to setServer!');
+      return;
+    }
+
+    localStorage.setItem('mifosXServerURL', url);
+    console.log('Server Set to:', url); // ✅ Debugging log
   }
-  
-  localStorage.setItem('mifosXServerURL', url);
-  console.log('Server Set to:', url); // ✅ Debugging log
-}
-
-
-  
-
 
   setServers(list: string[]) {
-  if (!list || list.length === 0) {
-    list = environment.baseApiUrls.split(',');
+    if (!list || list.length === 0) {
+      list = environment.baseApiUrls.split(',');
+    }
+    localStorage.setItem('mifosXServers', JSON.stringify(list));
   }
-  localStorage.setItem('mifosXServers', JSON.stringify(list));
-}
 
   /**
    * Sets server URL setting throughout the app.
@@ -175,9 +171,8 @@ export class SettingsService {
    * Returns server setting
    */
   get server(): string {
-  return localStorage.getItem('mifosXServerURL') || 'https://staging.mifos.io';
- }
-
+    return localStorage.getItem('mifosXServerURL') || 'https://staging.mifos.io';
+  }
 
   /**
    * Returns server url with api path without version
