@@ -75,7 +75,7 @@ export class ServerSelectorComponent implements OnInit {
     let savedServer =
       localStorage.getItem('mifosXServerURL') ||
       (window as any)['NEXT_PUBLIC_MIFOSX_SERVER'] ||
-      'https://staging.mifos.io';
+      'https://demo.mifos.io';
 
     // ✅ Save the server if not already stored
     if (!localStorage.getItem('mifosXServerURL')) {
