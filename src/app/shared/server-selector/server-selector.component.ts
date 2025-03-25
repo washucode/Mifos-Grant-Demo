@@ -84,6 +84,16 @@ export class ServerSelectorComponent implements OnInit {
 
     console.log('Using Fixed Server:', this.selectedServer);
 
+    setServer(): void {
+        this.settingsService.setServer(this.selectedServer);
+        console.log('Server manually set to:', this.selectedServer);
+      }
+
+    addNewServer(): void {
+      console.warn('Add server is disabled in fixed server mode.');
+    }
+
+
     // ✅ Save the server if not already stored
     // if (!localStorage.getItem('mifosXServerURL')) {
     //   localStorage.setItem('mifosXServerURL', savedServer);
