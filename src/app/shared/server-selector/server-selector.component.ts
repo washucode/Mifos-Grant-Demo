@@ -31,16 +31,20 @@ export class ServerSelectorComponent implements OnInit {
   ngOnInit(): void {
     this.selectedServer = 'https://demo.mifos.io';
     this.serverSelector = new UntypedFormControl(this.selectedServer);
+    // Force override any old server in localStorage
+    localStorage.setItem('mifosXServerURL', this.selectedServer);
+    localStorage.setItem('mifosXServers', JSON.stringify([this.selectedServer]));
+
     this.existMoreThanOneServer = false;
     this.settingsService.setServer(this.selectedServer);
 
     console.log('Using Fixed Server:', this.selectedServer);
-  }
+    }
 
-  setServer(): void {
-    if (!this.serverSelector.value) {
-      console.error('No server selected!');
-      return;
+    setServer(): void {
+      if (!this.serverSelector.value) {
+        console.error('No server selected!');
+        return;
     }
 
     this.selectedServer = this.serverSelector.value;
