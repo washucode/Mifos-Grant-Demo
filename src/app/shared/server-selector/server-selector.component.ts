@@ -73,8 +73,8 @@ export class ServerSelectorComponent implements OnInit {
 
     // ✅ Get stored server OR fallback to Vercel environment variable
     let savedServer =
-      localStorage.getItem('mifosXServerURL') ||
-      (window as any)['NEXT_PUBLIC_MIFOSX_SERVER'] ||
+      // localStorage.getItem('mifosXServerURL') ||
+      // (window as any)['NEXT_PUBLIC_MIFOSX_SERVER'] ||
       'https://demo.mifos.io';
 
     // ✅ Save the server if not already stored
